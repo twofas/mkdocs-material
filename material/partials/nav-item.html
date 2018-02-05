@@ -27,28 +27,32 @@
     </nav>
   </li>
 {% elif nav_item == page %}
-  <li class="{{ class }}">
-    {% set toc_ = page.toc %}
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    {% if toc_ | first is defined and "\x3ch1 id=" in page.content %}
-      {% set toc_ = (toc_ | first).children %}
-    {% endif %}
-    {% if toc_ | first is defined %}
-      <label class="md-nav__link md-nav__link--active" for="toc">
+  {% if nav_item.title not in config.extra.hidden %}
+    <li class="{{ class }}">
+      {% set toc_ = page.toc %}
+      <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+      {% if toc_ | first is defined and "\x3ch1 id=" in page.content %}
+        {% set toc_ = (toc_ | first).children %}
+      {% endif %}
+      {% if toc_ | first is defined %}
+        <label class="md-nav__link md-nav__link--active" for="toc">
+          {{ nav_item.title }}
+        </label>
+      {% endif %}
+      <a href="{{ nav_item.url }}" title="{{ nav_item.title }}" class="md-nav__link md-nav__link--active">
         {{ nav_item.title }}
-      </label>
-    {% endif %}
-    <a href="{{ nav_item.url }}" title="{{ nav_item.title }}" class="md-nav__link md-nav__link--active">
-      {{ nav_item.title }}
-    </a>
-    {% if toc_ | first is defined %}
-      {% include "partials/toc.html" %}
+      </a>
+      {% if toc_ | first is defined %}
+        {% include "partials/toc.html" %}
+      {% endif %}
     {% endif %}
   </li>
 {% else %}
-  <li class="{{ class }}">
-    <a href="{{ nav_item.url }}" title="{{ nav_item.title }}" class="md-nav__link">
-      {{ nav_item.title }}
-    </a>
-  </li>
+  {% if nav_item.title not in config.extra.hidden %}
+    <li class="{{ class }}">
+      <a href="{{ nav_item.url }}" title="{{ nav_item.title }}" class="md-nav__link">
+        {{ nav_item.title }}
+      </a>
+    </li>
+  {% endif %}
 {% endif %}

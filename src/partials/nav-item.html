@@ -63,41 +63,45 @@
 
 <!-- Currently active page -->
 {% elif nav_item == page %}
-  <li class="{{ class }}">
-    {% set toc_ = page.toc %}
+  {% if nav_item.title not in config.extra.hidden %}
+    <li class="{{ class }}">
+      {% set toc_ = page.toc %}
 
-    <!-- Active checkbox expands items contained within nested section -->
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc"
-        type="checkbox" id="toc" />
+      <!-- Active checkbox expands items contained within nested section -->
+      <input class="md-toggle md-nav__toggle" data-md-toggle="toc"
+          type="checkbox" id="toc" />
 
-    <!-- Hack: see partials/toc.html for more information -->
-    {% if toc_ | first is defined and "\x3ch1 id=" in page.content %}
-      {% set toc_ = (toc_ | first).children %}
-    {% endif %}
+      <!-- Hack: see partials/toc.html for more information -->
+      {% if toc_ | first is defined and "\x3ch1 id=" in page.content %}
+        {% set toc_ = (toc_ | first).children %}
+      {% endif %}
 
-    <!-- Render table of contents, if not empty -->
-    {% if toc_ | first is defined %}
-      <label class="md-nav__link md-nav__link--active" for="toc">
+      <!-- Render table of contents, if not empty -->
+      {% if toc_ | first is defined %}
+        <label class="md-nav__link md-nav__link--active" for="toc">
+          {{ nav_item.title }}
+        </label>
+      {% endif %}
+      <a href="{{ nav_item.url }}" title="{{ nav_item.title }}"
+          class="md-nav__link md-nav__link--active">
         {{ nav_item.title }}
-      </label>
-    {% endif %}
-    <a href="{{ nav_item.url }}" title="{{ nav_item.title }}"
-        class="md-nav__link md-nav__link--active">
-      {{ nav_item.title }}
-    </a>
+      </a>
 
-    <!-- Show table of contents -->
-    {% if toc_ | first is defined %}
-      {% include "partials/toc.html" %}
+      <!-- Show table of contents -->
+      {% if toc_ | first is defined %}
+        {% include "partials/toc.html" %}
+      {% endif %}
     {% endif %}
   </li>
 
 <!-- Main navigation item -->
 {% else %}
-  <li class="{{ class }}">
-    <a href="{{ nav_item.url }}" title="{{ nav_item.title }}"
-        class="md-nav__link">
-      {{ nav_item.title }}
-    </a>
-  </li>
+  {% if nav_item.title not in config.extra.hidden %}
+    <li class="{{ class }}">
+      <a href="{{ nav_item.url }}" title="{{ nav_item.title }}"
+          class="md-nav__link">
+        {{ nav_item.title }}
+      </a>
+    </li>
+  {% endif %}
 {% endif %}

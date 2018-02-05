@@ -113,6 +113,7 @@ button[data-md-color-accent] {
     .md-nav__link:active,
     .md-nav__link--active {
       color: $color;
+      font-weight: 900;
     }
 
     // Reset active color for nested list titles
