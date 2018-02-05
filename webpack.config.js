@@ -125,13 +125,25 @@ module.exports = env => {
         /* Copy images without cache busting */
         {
           context: "src",
-          from: "assets/images/*.{ico,png}"
+          from: "assets/images/*.{ico,png,svg}"
         },
 
         /* Copy configuration */
         {
           context: "src",
           from: "**/*.{py,yml}"
+        },
+
+        /* Copy Swagger JS*/
+        {
+          context: "src",
+          from: "assets/javascripts/swagger*.{js,map}"
+        },
+
+        /* Copy Swagger CSS*/
+        {
+            context: "src",
+            from: "assets/stylesheets/swagger*.{css,map}"
         },
 
         /* Copy and minify HTML */

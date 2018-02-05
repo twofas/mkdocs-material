@@ -114,10 +114,11 @@ hr {
 .md-main {
   display: table-row;
   height: 100%;
+  min-height: 50em;
 
   // Increase top spacing of content area to give typography more room
   &__inner {
-    height: 100%;
+    min-height: 50em;
     padding-top: 2.4rem + 0.6rem;
     // Hack: induce margin-collapse, because otherwise the sidebar height is
     // not calculated correctly and the overflow property on this element must

@@ -246,28 +246,20 @@
             {% endif %}
           {% endblock %}
 
+          {% if page.title in config.extra.wide%}
+            {% set content_class = "md-content-wide"%}
+          {% else%}
+            {% set content_class = "md-content"%}
+          {% endif %}
+
           <!-- Article -->
-          <div class="md-content">
+          <div class="{{ content_class }}">
             <article class="md-content__inner md-typeset">
 
               <!-- Content -->
               {% block content %}
 
                 <!-- Edit button, if URL was defined -->
-                {% if page.edit_url %}
-                  <a href="{{ page.edit_url }}"
-                      title="{{ lang.t('edit.link.title') }}"
-                      class="md-icon md-content__icon">&#xE3C9;<!-- edit --></a>
-                {% endif %}
-
-                <!--
-                  Hack: check whether the content contains a h1 headline. If it
-                  doesn't, the page title (or respectively site name) is used
-                  as the main headline.
-                -->
-                {% if not "\x3ch1" in page.content %}
-                  <h1>{{ page.title | default(config.site_name, true)}}</h1>
-                {% endif %}
 
                 <!-- Content -->
                 {{ page.content }}
@@ -285,6 +277,15 @@
                   {% endif %}
                 {% endblock %}
               {% endblock %}
+
+              <!--
+                 Hack: check whether the content contains a h1 headline. If it
+                 doesn't, the page title (or respectively site name) is used
+                 as the main headline.
+               -->
+              {% if not "\x3ch1" in page.content %}
+              <h1></h1>
+              {% endif %}
 
               <!-- Disqus integration -->
               {% block disqus %}
@@ -306,6 +307,9 @@
 
     <!-- Theme-related JavaScript -->
     {% block scripts %}
+      {% for path in extra_javascript %}
+      <script src="{{ path }}"></script>
+      {% endfor %}
       <script src="{{ base_url }}/assets/javascripts/application.js"></script>
 
       <!-- Load additional languages for search -->
@@ -339,9 +343,6 @@
           }
         });
       </script>
-      {% for path in extra_javascript %}
-        <script src="{{ path }}"></script>
-      {% endfor %}
     {% endblock %}
 
     <!-- Analytic scripts -->

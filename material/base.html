@@ -48,13 +48,13 @@
       {% endif %}
     {% endblock %}
     {% block styles %}
-      <link rel="stylesheet" href="{{ base_url }}/assets/stylesheets/application.aa3de92b.css">
+      <link rel="stylesheet" href="{{ base_url }}/assets/stylesheets/application.cda9d636.css">
       {% if palette.primary or palette.accent %}
-        <link rel="stylesheet" href="{{ base_url }}/assets/stylesheets/application-palette.792431c1.css">
+        <link rel="stylesheet" href="{{ base_url }}/assets/stylesheets/application-palette.42045028.css">
       {% endif %}
     {% endblock %}
     {% block libs %}
-      <script src="{{ base_url }}/assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="{{ base_url }}/assets/javascripts/modernizr.9825b1e5.js"></script>
     {% endblock %}
     {% block fonts %}
       {% if font != false %}
@@ -132,15 +132,14 @@
               </div>
             {% endif %}
           {% endblock %}
-          <div class="md-content">
+          {% if page.title in config.extra.wide%}
+            {% set content_class = "md-content-wide"%}
+          {% else%}
+            {% set content_class = "md-content"%}
+          {% endif %}
+          <div class="{{ content_class }}">
             <article class="md-content__inner md-typeset">
               {% block content %}
-                {% if page.edit_url %}
-                  <a href="{{ page.edit_url }}" title="{{ lang.t('edit.link.title') }}" class="md-icon md-content__icon">&#xE3C9;</a>
-                {% endif %}
-                {% if not "\x3ch1" in page.content %}
-                  <h1>{{ page.title | default(config.site_name, true)}}</h1>
-                {% endif %}
                 {{ page.content }}
                 {% block source %}
                   {% if page and page.meta and page.meta.source %}
@@ -153,6 +152,9 @@
                   {% endif %}
                 {% endblock %}
               {% endblock %}
+              {% if not "\x3ch1" in page.content %}
+              <h1></h1>
+              {% endif %}
               {% block disqus %}
                 {% if config.extra.disqus and not page.is_homepage %}
                   <h2 id="__comments">{{ lang.t("meta.comments") }}</h2>
@@ -168,7 +170,10 @@
       {% endblock %}
     </div>
     {% block scripts %}
-      <script src="{{ base_url }}/assets/javascripts/application.62cfdabc.js"></script>
+      {% for path in extra_javascript %}
+      <script src="{{ path }}"></script>
+      {% endfor %}
+      <script src="{{ base_url }}/assets/javascripts/application.580a5783.js"></script>
       {% if lang.t("search.language") != "en" %}
         {% set languages = lang.t("search.language").split(",") %}
         {% if languages | length and languages[0] != "" %}
@@ -190,9 +195,6 @@
         {% endif %}
       {% endif %}
       <script>app.initialize({version:"{{ mkdocs_version }}",url:{base:"{{ base_url }}"}})</script>
-      {% for path in extra_javascript %}
-        <script src="{{ path }}"></script>
-      {% endfor %}
     {% endblock %}
     {% block analytics %}
       {% if config.google_analytics %}

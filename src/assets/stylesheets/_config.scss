@@ -61,6 +61,9 @@ $break-devices: (
 $md-color-primary:                    $clr-indigo-500 !default;
 $md-color-accent:                     $clr-indigo-a200 !default;
 
+//2fas
+$twofas-prime-color:                  #213567;
+
 // Shades of black
 $md-color-black:                      hsla(0, 0%, 0%, 0.87) !default;
 $md-color-black--light:               hsla(0, 0%, 0%, 0.54) !default;

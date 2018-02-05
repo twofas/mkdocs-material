@@ -35,8 +35,7 @@
           {% if config.theme.logo.icon %}
             <i class="md-icon">{{ config.theme.logo.icon }}</i>
           {% else %}
-            <img src="{{ base_url }}/{{ config.theme.logo }}"
-                width="24" height="24" />
+            <img src="{{ base_url }}/{{ config.theme.logo }}"/>
           {% endif %}
         </a>
       </div>
@@ -51,18 +50,6 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title"
             data-md-component="title">
-          {% block site_name %}
-            {% if config.site_name == page.title %}
-              {{ config.site_name }}
-            {% else %}
-              <span class="md-header-nav__topic">
-                {{ config.site_name }}
-              </span>
-              <span class="md-header-nav__topic">
-                {{ page.title }}
-              </span>
-            {% endif %}
-          {% endblock %}
         </div>
       </div>
 
