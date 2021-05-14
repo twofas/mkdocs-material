@@ -48,13 +48,13 @@
       {% endif %}
     {% endblock %}
     {% block styles %}
-      <link rel="stylesheet" href="{{ base_url }}/assets/stylesheets/application.df52c504.css">
+      <link rel="stylesheet" href="{{ base_url }}/assets/stylesheets/application.44847ffd.css">
       {% if palette.primary or palette.accent %}
-        <link rel="stylesheet" href="{{ base_url }}/assets/stylesheets/application-palette.deca1074.css">
+        <link rel="stylesheet" href="{{ base_url }}/assets/stylesheets/application-palette.3de728fe.css">
       {% endif %}
     {% endblock %}
     {% block libs %}
-      <script src="{{ base_url }}/assets/javascripts/modernizr.25a7f34e.js"></script>
+      <script src="{{ base_url }}/assets/javascripts/modernizr.c652a888.js"></script>
     {% endblock %}
     {% block fonts %}
       {% if font != false %}
@@ -151,10 +151,10 @@
                     </a>
                   {% endif %}
                 {% endblock %}
+                {% if not "\x3ch1" in page.content %}
+                <h1></h1>
+                {% endif %}
               {% endblock %}
-              {% if not "\x3ch1" in page.content %}
-              <h1></h1>
-              {% endif %}
               {% block disqus %}
                 {% if config.extra.disqus and not page.is_homepage %}
                   <h2 id="__comments">{{ lang.t("meta.comments") }}</h2>
@@ -173,7 +173,7 @@
       {% for path in extra_javascript %}
       <script src="{{ path }}"></script>
       {% endfor %}
-      <script src="{{ base_url }}/assets/javascripts/application.104e2dde.js"></script>
+      <script src="{{ base_url }}/assets/javascripts/application.3793b3a6.js"></script>
       {% if lang.t("search.language") != "en" %}
         {% set languages = lang.t("search.language").split(",") %}
         {% if languages | length and languages[0] != "" %}

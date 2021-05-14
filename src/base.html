@@ -276,16 +276,15 @@
                     </a>
                   {% endif %}
                 {% endblock %}
+                <!--
+                   Hack: check whether the content contains a h1 headline. If it
+                   doesn't, the page title (or respectively site name) is used
+                   as the main headline.
+                 -->
+                {% if not "\x3ch1" in page.content %}
+                <h1></h1>
+                {% endif %}
               {% endblock %}
-
-              <!--
-                 Hack: check whether the content contains a h1 headline. If it
-                 doesn't, the page title (or respectively site name) is used
-                 as the main headline.
-               -->
-              {% if not "\x3ch1" in page.content %}
-              <h1></h1>
-              {% endif %}
 
               <!-- Disqus integration -->
               {% block disqus %}
